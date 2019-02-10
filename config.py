@@ -1,0 +1,1 @@
+FORVO_API_KEY = ''
