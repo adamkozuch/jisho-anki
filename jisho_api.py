@@ -8,14 +8,18 @@ import os
 
 
 class Jisho:
-    def search_word(self):
-        # add argument for correction
+    def enter_words(self):
         end_result = []
-        media_files = (glob.glob("*.mp3"))
         try:
             while(True):
-                word = input('insert word')
-                result = requests.get("http://beta.jisho.org/api/v1/search/words?keyword={}".format(word))
+                print('Type -exit to exit and generate Anki package ')
+                word = input('Word to search: ')
+                if word == "-exit":
+                    raise KeyboardInterrupt
+                s = requests.Session()
+                a = requests.adapters.HTTPAdapter(max_retries=3)
+                s.mount("http://", a)
+                result = s.get("http://beta.jisho.org/api/v1/search/words?keyword={}".format(word))
                 parsed = json.loads(result.text)
                 if parsed:
                     for i, v in enumerate(parsed['data'][0:3]):
@@ -23,8 +27,8 @@ class Jisho:
                         first_english_definition =v['senses'][0]['english_definitions'][0]
                         print(i, first_english_definition, first_reading)
 
-                    choosed = input("which word to add (default 0) ") or 0
-                    if choosed == '-1':
+                    choosed = input("Which word to add (default 0) type -skip to skip ") or 0
+                    if choosed == '-skip':
                         continue
                     element = parsed['data'][int(choosed)]
                     first_reading = element['japanese'][0]
@@ -34,12 +38,24 @@ class Jisho:
                     end_result = end_result + cards
                 else:
                     print('Word {0} not found'.format(word))
+
         except KeyboardInterrupt:
+            media_files = (glob.glob("*.mp3"))
             print("Adding words to deck")
+            print(media_files)
             anki_skripting.insert_cards_to_deck(end_result, media_files)
+            clean_up()
 
+        except Exception as e:
+            print(e)
 
+def clean_up():
+    dir_name = os.getcwd()
+    test = os.listdir(dir_name)
 
+    for item in test:
+        if item.endswith(".mp3"):
+            os.remove(os.path.join(dir_name, item))
 
 if __name__ == '__main__':
     fire.Fire(Jisho)

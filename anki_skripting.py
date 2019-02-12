@@ -97,19 +97,18 @@ my_mode4 = genanki.Model(
 
 def proces_forvo(kanji, english):
     try:
-        result = requests.request('GET', 'https://apifree.forvo.com/action/word-pronunciations/format/json/word/{0}/language/ja/rate/0/id_order/rate-desc/limit/50/key/5da601d944e2a53c663f56a815a4863f/'.format(kanji))
+        s = requests.Session()
+        a = requests.adapters.HTTPAdapter(max_retries=3)
+        s.mount("http://", a)
+        result = s.get('https://apifree.forvo.com/action/word-pronunciations/format/json/word/{0}/language/ja/rate/0/id_order/rate-desc/limit/50/key/5da601d944e2a53c663f56a815a4863f/'.format(kanji))
         data = json.loads(result.text)
-        for d in data['items']:
-            print('in d', d['code'])
-            if d['code'] == 'ja':
-                print(d)
+
+
         #wait untill urllib finishes
         if data['items']:
             best_rating = max(data['items'], key=lambda x: x['rate'])
-            print(best_rating)
             if best_rating['code'] == 'ja':
                 urllib.request.urlretrieve(best_rating['pathmp3'], 'sound{0}.mp3'.format(english))
-                time.sleep(2)
                 return True
             else:
                 print("No pronaunciation in japanese")
@@ -156,7 +155,6 @@ def generate_cards(english_meaning, kanji, reading):
         result.append(kanji_reading)
         return result
 
-
     except Exception as e:
         print(e)
 def insert_cards_to_deck(cards, media_files):
@@ -168,6 +166,7 @@ def insert_cards_to_deck(cards, media_files):
     for card in cards:
         my_deck.add_note(card)
     my_package.write_to_file('output.apkg')
+    print('Package output.apkg generated')
 
 def test_add_note_with_sound():
     my_deck = genanki.Deck(
