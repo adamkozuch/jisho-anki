@@ -24,15 +24,18 @@ class Jisho:
                 if parsed:
                     for i, v in enumerate(parsed['data'][0:3]):
                         first_reading = v['japanese'][0]
-                        first_english_definition =v['senses'][0]['english_definitions'][0]
+                        first_english_definition = get_engilis_definition(v['senses'][0]['english_definitions']) #element['senses'][0]['english_definitions'][0]
                         print(i, first_english_definition, first_reading)
 
                     choosed = input("Which word to add (default 0) type -skip to skip ") or 0
                     if choosed == '-skip':
                         continue
+                    if choosed == "-exit":
+                        raise KeyboardInterrupt
+                    # problem with non numberic vlues TODO
                     element = parsed['data'][int(choosed)]
                     first_reading = element['japanese'][0]
-                    first_english_definition = element['senses'][0]['english_definitions'][0]
+                    first_english_definition = get_engilis_definition(element['senses'][0]['english_definitions']) #element['senses'][0]['english_definitions'][0]
                     print(first_reading, first_english_definition)
                     cards = anki_skripting.generate_cards(first_english_definition, first_reading['word'], first_reading['reading'])
                     end_result = end_result + cards
@@ -48,6 +51,12 @@ class Jisho:
 
         except Exception as e:
             print(e)
+
+def get_engilis_definition(arr):
+    if len(arr) > 3:
+        return ', '.join(arr[:3])
+    else:
+        return ', '.join(arr)
 
 def clean_up():
     dir_name = os.getcwd()
