@@ -31,14 +31,24 @@ FORVO_API_KEY = 'some_api_key'
 <br>
 
 ##jisho-anki usage
+Before start install requirements.txt
+
+
 ```
-python3 jisho_api.py search  word
+python3 janki.py search  word
+```
+For instance
+```
+python3 janki.py search  hantai
 ```
 
+If there are multiple definitions you will have to choose one:
+<img src='https://user-images.githubusercontent.com/5136443/53292055-3344bc00-37bd-11e9-90bd-a12ddc8bf63d.png' width=270px height=200px>
 
+Chosen words is writtent to words.json file. After adding words use command: 
+```
+python3 janki.py generate
+```
+Which will generate output.apkg file ready to import into anki.
 
-Script enters loop where we can add multiple 
-words at once. When you finished adding words
-just type `-exit` . After that, package that can be imported 
-to Anki will be generated in local directory.
 
