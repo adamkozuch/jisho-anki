@@ -43,7 +43,7 @@ python3 janki.py search  hantai
 ```
 
 If there are multiple definitions you will have to choose one:
-<img src='https://user-images.githubusercontent.com/5136443/53292055-3344bc00-37bd-11e9-90bd-a12ddc8bf63d.png' width=270px height=200px>
+<img src='https://user-images.githubusercontent.com/5136443/53292055-3344bc00-37bd-11e9-90bd-a12ddc8bf63d.png' >
 
 Chosen words is writtent to words.json file. After adding words use command: 
 ```
