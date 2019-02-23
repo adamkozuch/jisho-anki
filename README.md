@@ -12,7 +12,6 @@ Card with word written with kanji and english meaning on the back:
 <img src='https://user-images.githubusercontent.com/5136443/53291111-6764b080-37ae-11e9-98a4-8de755b50cb3.PNG' width=270px height=200px>
 <br> Card with english meaning on the front and kanji on the back. 
 This type of card is integrated with kanji colorer. Hightly recomended to install this plugin.
-
 <img src='https://user-images.githubusercontent.com/5136443/53291112-6764b080-37ae-11e9-9560-a36476ca2f05.PNG' width=270px height=200px>
 <br>
 Kanji on the front and reading written in hiragana on the back
@@ -30,7 +29,8 @@ FORVO_API_KEY = 'some_api_key'
 
 <br>
 
-##jisho-anki usage
+## jisho-anki usage
+<br>
 Before start install requirements.txt
 
 
