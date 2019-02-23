@@ -37,15 +37,14 @@ def proces_forvo(kanji, english):
 
 def generate_cards_extended(english_meaning, kanji, reading):
     try:
-        is_aodio = proces_forvo(kanji, english_meaning)
 
         front = genanki.Note(
             model=english_to_kanji,
-            fields=[english_meaning, kanji, reading])
+            fields=[english_meaning, kanji, ""]) # I should add radical
 
         reverse = genanki.Note(
             model=kanji_to_english_card,
-            fields=[kanji, english_meaning, reading])
+            fields=[kanji, english_meaning, reading]) # here picturewould be good
 
 
         kanji_reading = genanki.Note(
@@ -54,12 +53,13 @@ def generate_cards_extended(english_meaning, kanji, reading):
         result = []
 
 
-        audio_name = 'sound{0}.mp3'.format(english_meaning)
-        if is_aodio:
+        audio_name = 'sound{0}.mp3'.format(english_meaning) # should I add one for kanji as well
+        if os.path.isfile(audio_name):
             pronaunciation = genanki.Note(
                 model=sound_card,
-                fields=['[sound:{0}]'.format(audio_name), english_meaning, reading])
+                fields=['[sound:{0}]'.format(audio_name), english_meaning, english_meaning[0]])
             result.append(pronaunciation)
+
         result.append(front)
         result.append(reverse)
         result.append(kanji_reading)
@@ -101,8 +101,8 @@ def generate_cards_basic(english_meaning, kanji, reading):
 
 def insert_cards_to_deck(cards, media_files):
     my_deck = genanki.Deck(
-        2059400201,
-        'Japanese_words')
+        2059400201311,
+        'japanese_vocab')
     my_package = genanki.Package(my_deck)
     my_package.media_files = media_files
     for card in cards:
@@ -133,3 +133,22 @@ def clean_up():
     for item in test:
         if item.endswith(".mp3"):
             os.remove(os.path.join(dir_name, item))
+
+
+def save_to_words_json(obj):
+
+    try:
+        with open('words.json', 'r') as file:
+            try:
+                data = json.load(file)
+            except Exception as e:
+                data = {'data':[]}
+    except FileNotFoundError as e:
+        data = {'data':[]}
+
+    obj = [obj] if isinstance(obj, dict) else obj
+    data['data'] = data['data'] + obj
+
+    with open('words.json', 'w+') as file:
+        json.dump(data, file)
+        print('Words added to json')

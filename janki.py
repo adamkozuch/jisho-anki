@@ -29,9 +29,9 @@ class Jisho:
                 media_files = (glob.glob("*.mp3"))
             insert_cards_to_deck(cards, media_files)
 
-    def search(self, basic=False, sound=True):
+    def search(self, word, basic=False, sound=True):
         try:
-            word = input('Type word you want to find: ')
+            # word = input('Type word you want to find: ')
             word_object = get_word_object(word)
 
             if word_object:
@@ -141,7 +141,6 @@ def get_word_object(word):
     request_session = return_request_session()
     jisho_definition = request_session.get("http://beta.jisho.org/api/v1/search/words?keyword={}".format(word))
     result = json.loads(jisho_definition.text)
-    print(result)
     return result
 
 

@@ -4,10 +4,38 @@ fields = [
     {'name': 'Answer'},
     {'name': 'Hint'},
 ]
-templates = [
+
+fields_1 = [
+    {'name': 'Question'},
+    {'name': 'Kanji'},
+    {'name': 'Diagram'},
+]
+
+templates_1 = [
     {
         'name': 'Card 1',
-        'qfmt': '{{Question}}{{hint:Hint}}',
+        'qfmt': 'English meaning <br> {{Question}} <br> <br> <br> {{hint:Hint}}',
+        'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}',
+    }]
+
+templates_2 = [
+    {
+        'name': 'Card 1',
+        'qfmt': 'English meaning <br> {{Question}} <br> <br> <br> {{hint:Hint}}',
+        'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}',
+    }]
+
+templates_3 = [
+    {
+        'name': 'Card 1',
+        'qfmt': 'Kanji <br> {{Question}} <br> <br> <br> {{hint:Hint}}',
+        'afmt': '{{FrontSide}}<hr id="answer">{{Kanji}} <br> {{Diagram}}',
+    }]
+
+templates_4 = [
+    {
+        'name': 'Card 1',
+        'qfmt': 'Kanji reading <br> {{Question}} <br> <br> <br> {{hint:Hint}}',
         'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}',
     }]
 
@@ -15,7 +43,7 @@ sound_card = genanki.Model(
     160739111519,
     'sound model',
     fields=fields,
-    templates=templates,
+    templates=templates_1,
     css='''.card {
         font-family: honyaji-re;
         font-size: 40px;
@@ -34,7 +62,7 @@ kanji_to_english_card = genanki.Model(
     160739118319,
     'kanji model',
     fields=fields,
-    templates=templates,
+    templates=templates_2,
     css='''.card {
         font-family: honyaji-re;
         font-size: 40px;
@@ -51,9 +79,9 @@ kanji_to_english_card = genanki.Model(
 
 english_to_kanji = genanki.Model(
     160739191319,
-    'english model',
-    fields=fields,
-    templates=templates,
+    'Japanese_model',
+    fields=fields_1,
+    templates=templates_3,
     css='''.card {
         font-family: honyaji-re;
         font-size: 40px;
@@ -72,7 +100,7 @@ kanji_to_reading = genanki.Model(
     1607391018319,
     'kanji reading model',
     fields=fields,
-    templates=templates,
+    templates=templates_4,
     css='''.card {
         font-family: honyaji-re;
         font-size: 40px;
