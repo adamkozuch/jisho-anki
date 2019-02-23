@@ -5,11 +5,25 @@ and add it to anki package in local directory.
 Afterwards if you have forvo subscription it is 
 adding card with word pronunciation:
 Before running the script you have to install requirements.txt.
+
 You can run script with:
-![alt text](https://user-images.githubusercontent.com/5136443/53291111-6764b080-37ae-11e9-98a4-8de755b50cb3.PNG  =250x250)
-![alt text](https://user-images.githubusercontent.com/5136443/53291112-6764b080-37ae-11e9-9560-a36476ca2f05.PNG)
-![alt text](https://user-images.githubusercontent.com/5136443/53291148-cb877480-37ae-11e9-8bdb-d86941a4153e.PNG)
-![alt text](https://user-images.githubusercontent.com/5136443/53291149-cc200b00-37ae-11e9-8fa9-24e05eea08db.PNG)
+<br>
+<br>
+Card with word written with kanji and english meaning on the back:
+<br>
+<img src='https://user-images.githubusercontent.com/5136443/53291111-6764b080-37ae-11e9-98a4-8de755b50cb3.PNG' width=200px height=150px>
+<br> Card with english meaning on the front and kanji on the back. 
+This type of card is integrated with kanji colorer. Hightly recomended to install this plugin.
+
+<img src='https://user-images.githubusercontent.com/5136443/53291112-6764b080-37ae-11e9-9560-a36476ca2f05.PNG' width=200px height=150px>
+<br>
+Kanji on the front and reading written in hiragana on the back
+<img src='https://user-images.githubusercontent.com/5136443/53291148-cb877480-37ae-11e9-8bdb-d86941a4153e.PNG' width=200px height=150px>
+<br>
+Audio with pronaunciation on the front and english meaning on the back. It is availible only for subscribers of forvo api.
+<img src='https://user-images.githubusercontent.com/5136443/53291149-cc200b00-37ae-11e9-8fa9-24e05eea08db.PNG' width=200px height=150px>
+
+<br>
 ```
 python3 jisho_api.py enter_words
 ```
