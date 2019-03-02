@@ -16,7 +16,7 @@ class Jisho:
                 print(w['english'], ' --- ', w['kanji'])
 
     def prune(self):
-        with open('words.json', 'w') as file:
+        with open ('words.json', 'w') as file:
             json.dump({'data':[]}, file)
             clean_up()
 
