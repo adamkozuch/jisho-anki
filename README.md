@@ -1,7 +1,7 @@
 # jisho-anki - opinionated command line for creating japanese flashcards with anki
 
 Janki is a command line for automatic search of given word in Jisho dictionary and creating 
-from it collection from which anki package can be generated. For each added word janki generated
+from it collection which anki package can be generated. For each added word janki generated
 four cards with following content:
 
 
